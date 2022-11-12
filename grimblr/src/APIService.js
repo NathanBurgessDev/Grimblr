@@ -2,7 +2,7 @@ export default class APIService {
     
 
     static InsertName(name) {
-        return fetch("http://localhost:3000/result", {
+        return fetch("http://localhost:5000/result", {
         method: "POST",
         headers: {
             "Content-Type":"application/json"
