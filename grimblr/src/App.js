@@ -1,11 +1,7 @@
 import logo from './logo.png';
 import './App.css';
 import { useState } from 'react';
-
-
-function handleInput(username) {
-  alert(username);
-}
+import APIService from './APIService';
 
 function FormSubmit () {
   const [username, setUsername] = useState("");
@@ -19,7 +15,7 @@ function FormSubmit () {
         onChange={(e) => { setUsername(e.target.value) }}
       />
       <br></br>
-      <button class="buttons" onClick={() => handleInput(username)}>Submit</button>
+      <button class="buttons" onClick={() => APIService.InsertName(username)}>Submit</button>
     </div>
   );
 }
