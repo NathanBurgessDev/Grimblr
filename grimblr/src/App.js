@@ -22,4 +22,5 @@ function onSubmit() {
 function setHandle(text) {
   handle = text
 }
+
 export default App;
