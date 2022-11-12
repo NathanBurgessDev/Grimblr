@@ -6,12 +6,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <input type="text" />
+        <button > Submit</button>
       </header>
-      <form>
-        <label>Enter Twitter username:
-          <input type="text" />
-        </label>
-      </form>
     </div>
   );
 }
