@@ -21,7 +21,10 @@ class TweetGrabber():
         user_data = self.client.get_users_tweets(newUser.data.id,max_results = 10)
         return user_data
 
-    
+    def user_id(self,user):
+        newUser = self.client.get_user(username=user)
+        
+        return newUser
 	# 	API_results = self.tweepy.Cursor(self.api.user_timeline,screen_name = user,tweet_mode='extended').items()
 
 	# 	with open(f'{csv_prefix}.csv', 'w', newline='') as csvfile:
