@@ -1,20 +1,33 @@
 from flask import Flask, request
 import pandas as pd
 import tweepy
+import tweetGrabber as tweetGrabber
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+comsumer_key = os.getenv('consumer_key')
+consumer_secret = os.getenv('consumer_secret')
+access_token = os.getenv('access_token')
+access_token_secret = os.getenv('access_token_secret')
+client = os.getenv('client')
+
+t = tweetGrabber(
+    myApi = comsumer_key,
+    sApi = consumer_secret,
+    at = access_token,
+    sAt = access_token_secret,
+    client = client )
 
 app=Flask(__name__, static_folder='../frontend')
 @app.route('/result', methods = ['POST'])
 def result():
-    username= request.data
+    # un-comment this to use the user search
+    #t.user_search(user=screen_name)
+    ()
 
 if __name__== '__main__':
    app.run(host='0.0.0.0',port=5000)
     
 
 client= tweepy.Client("AAAAAAAAAAAAAAAAAAAAAKHrjAEAAAAAGKRExYvQH7wUMuNi1yKkSQ12sjU%3DTvvpTvu4ZoV8dyHXdecJb5fqs0xJKnolipFHSfmaCC0Tjy90xW")
-
-
-user= client.get_users_tweets(1339289068832763908, max_results=5)
-
-for data in user.data:
-    print(data['text'])
