@@ -18,8 +18,9 @@ class TweetGrabber():
 		
     def user_search(self,user):
         newUser = self.client.get_user(username=user)
-        user_data = self.client.get_users_tweets(newUser.data.id,max_results = 10)
-        return user_data
+        user = self.client.get_users_tweets(newUser.data.id,max_results = 10)
+        
+        return user
 
     def user_id(self,user):
         newUser = self.client.get_user(username=user)
