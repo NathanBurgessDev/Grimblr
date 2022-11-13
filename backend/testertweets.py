@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pandas as pd
 import tweepy
@@ -13,19 +13,22 @@ access_token = os.getenv('access_token')
 access_token_secret = os.getenv('access_token_secret')
 client = os.getenv('client')
 
+username = ""
+
 t = TweetGrabber(
     myApi = consumer_key,
     sApi = consumer_secret,
     at = access_token,
     sAt = access_token_secret,
-    client = client )
+    client = client 
+)
 
 app=Flask(__name__, static_folder='../frontend')
 CORS(app)
 @app.route('/result', methods = ['POST'])
 def result():
-    username= request.data
-    return username
+    username = request.json
+    return jsonify(username)
 
 if __name__== '__main__':
    app.run(host='0.0.0.0',port=5000)
