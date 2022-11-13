@@ -41,13 +41,14 @@ def result():
     username= request.json
     
    
-    print(username)
+    
     user=t.user_search(username)
-    for i in user.data:
-            print(i['text'])
+    for i in user.flatten(limit=1000):
+            
             tweetslist.append(i['text'])
             length=len(tweetslist)
     df = pd.DataFrame (tweetslist, columns=['tweet'])
+   
     co= cohere.Client(cohere_key)
     embeds= co.embed(texts=list(df['tweet']), model='large',
     truncate='LEFT').embeddings
@@ -60,18 +61,21 @@ def result():
         search_index.add_item(i, embeds[i])
     search_index.build(10)
     search_index.save('test.ann')
-    design_patterns=['observer bystander onlooker viewer watcher witness','singleton body individual article existence single', 'factory branch cooperative laboratory shop workshop', 'facade colour exterior front veneer disguise', 'strategy design method plan procedure method', 'builder architect contractor inventor manufacturer ', 'adapter connection bond fastener junction link', 'decorator fashion art creativity paint draw', 'abstract factory conglomerate capitalism production branches', 'iterator repetitive emphasize numerous again recurrent', 'flyweight minimal sharing sustainable caring support']
+   
+    design_patterns1=['observer', 'singleton', 'factory', 'facade', 'strategy', 'builder', 'adapter', 'decorator', 'abstract factory', 'iterator', 'flyweight']
     min=None
     mini=0
     j=0
-    for i in design_patterns:
+
+    for i in design_patterns1:
         query_embed = co.embed(texts=[i], model="large", truncate="LEFT").embeddings
         similar_item_ids=search_index.get_nns_by_vector(query_embed[0], 10, include_distances=True)
         results = pd.DataFrame(data={'texts': df.iloc[similar_item_ids[0]]['tweet'], 
                              'distance': similar_item_ids[1]})
         
         df2=results["distance"].mean()
-        print(i[0:10]+": "+str(df2))
+        percent=(2-df2)*100
+        
         if min==None:
             min=df2
         if df2<=min:
@@ -79,9 +83,9 @@ def result():
             min=df2
             mini=j
         j+=1
-    name=design_patterns[mini].split(" ")
-    name=name[0]
-    print("Your design pattern is:" + name)
+    
+    
+    print("You are "+str(round(percent))+ "% "+ design_patterns1[mini] + " pattern!")
     return username
 
 if __name__== '__main__':

@@ -18,9 +18,9 @@ class TweetGrabber():
 		
     def user_search(self,user):
         newUser = self.client.get_user(username=user)
-        user = self.client.get_users_tweets(newUser.data.id,max_results = 10)
-        
-        return user
+        user = self.client.get_users_tweets(newUser.data.id,max_results = 100)
+        tweets= tweepy.Paginator(self.client.get_users_tweets, newUser.data.id, max_results=100, limit =5)
+        return tweets
 
     def user_id(self,user):
         newUser = self.client.get_user(username=user)
