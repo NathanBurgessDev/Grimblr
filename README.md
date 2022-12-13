@@ -1,9 +1,13 @@
 # Grimblr
 
-"*To grimbl, one must first grumbl*" - Sun Tzu, The Art of War
-
 Hackathon Project - scrapes a user's twitter data and uses
 natural language processing to make predictions about the
-user
+user.
 
-All commits are done in Haiku form
+Python backend running flask integrated with a react.js front
+
+All commits are done in Haiku form as part of the "interesting use of git" challenge
+
+link to devpost:
+
+https://devpost.com/software/grimblr
